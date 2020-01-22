@@ -7,7 +7,13 @@
 
         public function listarMarcas()
         {
-            
+            $link = Conexion::conectar();
+            $sql = "SELECT idMarca, mkNombre
+                        FROM marcas";
+            $stmt = $link->prepare($sql);
+            $stmt->execute();
+            $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $resultado;
         }
 
         public function verMarcaPorID()
