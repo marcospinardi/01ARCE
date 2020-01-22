@@ -1,5 +1,8 @@
 <?php
-
+    require 'clases/Conexion.php';
+    require 'clases/Marca.php';
+    $objMarca = new Marca;
+    $marcas = $objMarca->listarMarcas();
     include 'includes/header.html';
     include 'includes/nav.php';
 ?>
@@ -22,10 +25,12 @@
             </tr>
             </thead>
             <tbody>
-
+<?php
+            foreach ( $marcas as $marca  ){
+?>
             <tr>
-                <td>idMarca</td>
-                <td>mkNombre</td>
+                <td><?= $marca['idMarca']; ?></td>
+                <td><?= $marca['mkNombre']; ?></td>
                 <td>
                     <a href="formModificarMarca.php" class="btn btn-outline-secondary">
                         modificar
@@ -37,7 +42,9 @@
                     </a>
                 </td>
             </tr>
-
+<?php
+            }
+?>
             </tbody>
         </table>
 
