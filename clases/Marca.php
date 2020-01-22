@@ -23,7 +23,23 @@
 
         public function agregarMarca()
         {
-            
+            $mkNombre = $_POST['mkNombre'];
+            $link = Conexion::conectar();
+            $sql = "INSERT INTO marcas
+                        VALUES
+                            ( default, :mkNombre )";
+            $stmt = $link->prepare($sql);
+            $stmt->bindParam(':mkNombre', $mkNombre, PDO::PARAM_STR);
+
+            if( $stmt->execute() ){
+                $this->setIdMarca($link->lastInsertId());
+                $this->setMkNombre($mkNombre);
+                return true;
+            }
+            return false;
+
+
+
         }
 
         public function modificarMarca()
